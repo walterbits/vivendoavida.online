@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Cierres Esta Página</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a3055;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(to right, #d86020, #e87530);
+            padding: 12px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(14px, 4vw, 18px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .warning-alert {
+            background: rgba(40, 60, 95, 0.8);
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-radius: 4px;
+        }
+
+        .warning-icon {
+            color: #ffc107;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .warning-text {
+            font-size: clamp(15px, 3.8vw, 17px);
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .progress-section {
+            margin-bottom: 25px;
+        }
+
+        .progress-bar-wrapper {
+            background: rgba(123, 159, 232, 0.3);
+            border-radius: 30px;
+            height: 44px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(to right, #7b9fe8, #aac2f0);
+            height: 100%;
+            width: 50%;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #1a3055;
+            font-weight: 600;
+            font-size: 15px;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: loading 2s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .message-box {
+            background: transparent;
+            text-align: center;
+            margin: 25px 0;
+            padding: 0 10px;
+        }
+
+        .message-box p {
+            font-size: clamp(13px, 3.5vw, 15px);
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .video-wrapper {
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-caption {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 15px;
+            text-align: center;
+            font-size: clamp(11px, 3vw, 13px);
+            line-height: 1.4;
+        }
+
+        .brand-logo {
+            position: absolute;
+            bottom: 45px;
+            left: 12px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #000;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 12px;
+            }
+
+            .warning-alert {
+                padding: 12px 15px;
+            }
+
+            .progress-bar-wrapper {
+                height: 40px;
+            }
+
+            .message-box {
+                margin: 20px 0;
+            }
+
+            .brand-logo {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+                bottom: 42px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NO CIERRES ESTA PÁGINA, MIRA EL AVISO</h1>
+    </div>
+
+    <div class="container">
+        <div class="warning-alert">
+            <div class="warning-icon">⚠</div>
+            <div class="warning-text">¡ESPERA! Tu Compra Aún No Está 100%.</div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill" id="progressBar"></div>
+                <div class="progress-text" id="progressText">Tu acceso está a 50%...</div>
+            </div>
+        </div>
+
+        <div class="message-box">
+            <p>EN UNOS INSTANTES RECIBIRÁS TU ACCESO AL TRUCO DE LA GELATINA. PERO MIRA EL MENSAJE A CONTINUACIÓN PARA QUE NO OCURRA NINGÚN ERROR.</p>
+        </div>
+
+        <div class="video-wrapper">
+            <div class="video-container">
+                <!-- Substitua o YOUR_YOUTUBE_VIDEO_ID pelo ID do seu vídeo do YouTube -->
+                <iframe 
+                    src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="brand-logo">PJ</div>
+            <div class="video-caption">recibirás un correo electrónico con el acceso</div>
+        </div>
+    </div>
+
+    <script>
+        // Animação da barra de progresso - mantém em 50% com efeito de carregamento
+        window.addEventListener('load', function() {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            // Mantém a barra em 50% com animação de carregamento
+            // Se quiser que ela complete até 100%, descomente o código abaixo:
+            
+            /*
+            let progress = 50;
+            const progressInterval = setInterval(function() {
+                if (progress < 100) {
+                    progress += 1;
+                    progressBar.style.width = progress + '%';
+                    progressText.textContent = 'Tu acceso está a ' + progress + '%...';
+                } else {
+                    progressText.textContent = '¡Acceso Completo al 100%!';
+                    clearInterval(progressInterval);
+                }
+            }, 50);
+            */
+        });
+    </script>
+</body>
+</html>
